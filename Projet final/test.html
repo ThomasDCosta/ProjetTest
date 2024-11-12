@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Température au fil du temps</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Évolution de la température (temps réel)</h2>
+    <canvas id="temperatureChart" width="400" height="200"></canvas>
+
+    <script>
+        const apiKey = 'dc398b5220186299a2518d8b1c23b285';
+        const city = 'Paris';
+        const temperatureData = JSON.parse(localStorage.getItem('temperatureData')) || [];
+        const timeLabels = JSON.parse(localStorage.getItem('timeLabels')) || [];
+
+        async function getCoordinates(city) {
+            const geoResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+            const geoData = await geoResponse.json();
+            return geoData.coord;
+        }
+
+        async function getWeatherData(lat, lon) {
+            const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+            const weatherData = await weatherResponse.json();
+            return weatherData.main.temp;
+        }
+
+        async function updateTemperatureChart() {
+            const { lat, lon } = await getCoordinates(city);
+            const temp = await getWeatherData(lat, lon);
+            const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // Ajouter les nouvelles valeurs de température et l'heure
+            temperatureData.push(temp);
+            timeLabels.push(currentTime);
+
+            // Limiter à 24 points
+            if (temperatureData.length > 24) {
+                temperatureData.shift();
+                timeLabels.shift();
+            }
+
+            // Mettre à jour localStorage
+            localStorage.setItem('temperatureData', JSON.stringify(temperatureData));
+            localStorage.setItem('timeLabels', JSON.stringify(timeLabels));
+
+            // Mettre à jour le graphique
+            chart.update();
+        }
+
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'Température (°C)',
+                    data: temperatureData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    lineTension: 0.2,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Heure' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Température (°C)' }
+                    }
+                }
+            }
+        });
+
+        // Démarrer la mise à jour toutes les 10 minutes
+        updateTemperatureChart();  // Appel initial
+        setInterval(updateTemperatureChart, 60000);  // 600000 ms = 10 minutes
+    </script>
+</body>
+</html>

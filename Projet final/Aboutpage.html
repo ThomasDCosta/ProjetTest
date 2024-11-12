@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Example</title>
+    <!-- Import de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial, sans-serif';
+            background-color: #f0f2f5;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(45deg, #000, #333);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #f5f5f5;
+            width: 220px;
+            padding: 20px;
+            border-right: 2px solid #ddd;
+            height: 100vh;
+        }
+        .sidebar a {
+            color: #333;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* Contenu principal */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 2rem;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bg-light {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+            }
+            .container {
+                margin-top: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <!-- Titre du site -->
+                <a class="navbar-brand" href="Homepage.html" style="color: #fff; font-size: 30px;">Titre Site</a>
+
+                <!-- Nom de l'utilisateur aligné à droite -->
+                <div class="ml-auto" style="color: #fff;">
+                    <i class="bi bi-person"></i>
+                    <span id="infoDisplay"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="d-flex">
+        <!-- Menu latéral -->
+        <div class="sidebar">
+            <a href="Homepage.html"><i class="bi bi-house"></i> Homepage</a>
+            <a href="#"><i class="bi bi-database"></i> Data</a>
+            <a href="#"><i class="bi bi-book"></i> Tutorial</a>
+            <a href="#"><i class="bi bi-file-earmark"></i> About Us</a>
+            <a href="Registerpage.html"><i class="bi bi-door-open"></i> Sign out</a>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="container-fluid mt-5">
+            <h2 class="text-center">À propos de nous</h2>
+            <div class="bg-light p-4 rounded shadow">
+                <p>Bienvenue sur notre application web dédiée à la surveillance et à l'affichage des données en temps réel sur la qualité de l'air. Notre objectif est de fournir aux utilisateurs des informations précises et accessibles concernant les niveaux de divers polluants atmosphériques, afin de promouvoir une meilleure compréhension et une prise de conscience des enjeux environnementaux.</p>
+
+                <p>Notre plateforme vous permet de suivre en temps réel plusieurs paramètres cruciaux, notamment :</p>
+                <ul>
+                    <li><strong>Température</strong> : Suivez les variations de température dans votre région pour mieux comprendre l'impact des conditions climatiques sur la qualité de l'air.</li>
+                    <li><strong>Humidité</strong> : Découvrez le taux d'humidité ambiant, un facteur important qui peut influencer la qualité de l'air et la santé.</li>
+                    <li><strong>PM2.5 et PM10</strong> : Ces particules fines sont des polluants majeurs pouvant avoir des effets nocifs sur la santé humaine. Suivez leur concentration pour prendre des décisions éclairées sur vos activités à l'extérieur.</li>
+                    <li><strong>NOx (Oxydes d'azote)</strong> : Surveillez les niveaux de NOx, des polluants souvent émis par les véhicules et les installations industrielles.</li>
+                    <li><strong>NH3 (Ammoniac)</strong> : Évaluez la concentration d'ammoniac, un autre polluant atmosphérique qui peut avoir des impacts environnementaux significatifs.</li>
+                    <li><strong>CO2 (Dioxyde de carbone)</strong> : Suivez les niveaux de CO2, un gaz à effet de serre majeur, pour comprendre son influence sur le changement climatique.</li>
+                    <li><strong>SO2 (Dioxyde de soufre)</strong> : Restez informé sur les concentrations de SO2, un polluant associé à la combustion de combustibles fossiles.</li>
+                    <li><strong>Niveaux de COV (Composés organiques volatils)</strong> : Les COV peuvent avoir des effets néfastes sur la santé et la qualité de l'air intérieur. Notre application vous aide à les surveiller.</li>
+                </ul>
+
+                <p>Grâce à une interface conviviale, notre site offre diverses options pour explorer ces données, telles que des graphiques interactifs, des rapports personnalisés et des alertes sur les niveaux de pollution. Que vous soyez un citoyen soucieux de sa santé ou un professionnel de l'environnement, notre application est conçue pour répondre à vos besoins en matière de surveillance de la qualité de l'air.</p>
+
+                <p>Nous croyons qu'une meilleure compréhension de l'air que nous respirons peut contribuer à des choix plus sains et à un avenir plus durable. Rejoignez-nous dans notre mission de sensibilisation et d'éducation sur la qualité de l'air !</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Récupération des données du Local Storage -->
+    <script>
+        const username = localStorage.getItem('username') || 'Nom';
+        const city = localStorage.getItem('city') || 'Ville';
+
+        // Affichage des données
+        document.getElementById('infoDisplay').innerHTML = `${username} (${city})`;
+    </script>
+
+    <!-- Import de Bootstrap JS (facultatif si tu as besoin de fonctionnalités interactives) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
